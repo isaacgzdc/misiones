@@ -61,7 +61,6 @@ public final class DataForTest {
 				.crew(crewSet)
 				.passengers(passengerSet)
 				.name("EARTH-2100-JVL")
-				.plate(UUID.randomUUID())
 				.build();
 		
 		

@@ -21,6 +21,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.example.misiones.config.JacksonConfig;
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -46,7 +49,9 @@ public class Mission {
 	private String name;
 	@Future(message = "Mission start date must be in the future")
 	@NotNull
+	@JsonFormat(pattern = JacksonConfig.DATE_WITH_HOUR_FORMAT)
 	private LocalDateTime initDate;
+	@JsonFormat(pattern = JacksonConfig.DATE_WITH_HOUR_FORMAT)
 	private LocalDateTime endDate;
 	
 	@NotNull

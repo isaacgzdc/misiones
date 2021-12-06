@@ -68,14 +68,11 @@ public class MisionesEspacialesApplication {
 					.build();
 			passengerSet.add(passenger);
 			
-			
 			Ship ship = Ship.builder()
 					.crew(crewSet)
 					.passengers(passengerSet)
 					.name("EARTH-2100-JVL")
-					.plate(UUID.randomUUID())
 					.build();
-			
 			
 			Mission mission1 = Mission.builder()
 					.name("From earth to mars")

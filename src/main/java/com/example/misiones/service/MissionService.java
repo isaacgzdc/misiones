@@ -1,5 +1,6 @@
 package com.example.misiones.service;
 
+import java.time.Duration;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,4 +15,6 @@ public interface MissionService {
 	Mission update(Long id, MissionRequest dto);
 	void deleteById(Long id);
 	Mission save(MissionRequest req);
+	
+	Duration getMissionPeriod(Mission mission);
 }

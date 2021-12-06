@@ -10,9 +10,11 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -65,6 +67,10 @@ class MissionControllerTest {
 	@Test
 	void testCreateNewMission() throws Exception {
 		MissionRequest req = DataForTest.missionRequest("First test", LocalDateTime.now().plusDays(1));
+		Mission mission = new Mission();
+		mission.setId(1L);
+		mission.setInitDate(req.getInitDate());
+		when(missionService.save(req)).thenReturn(mission);
 		//
 		final String uri = "/api/v1/missions/save";
 		this.mockMvc
@@ -72,8 +78,11 @@ class MissionControllerTest {
 					.contentType(MediaType.APPLICATION_JSON)
 					.accept(MediaType.APPLICATION_JSON)
 			.content(mapper.writeValueAsString(req)))
-			.andExpect(jsonPath("$.id").isNumber())
+			.andExpect(jsonPath("$.id").value(Matchers.is(mission.getId().intValue())))
+			.andExpect(jsonPath("$.initDate").value(Matchers.is(mission.getInitDate().format(DateTimeFormatter.ofPattern(JacksonConfig.DATE_WITH_HOUR_FORMAT)))))
 			.andExpect(MockMvcResultMatchers.status().is(HttpStatus.CREATED.value()))
 			.andDo(MockMvcResultHandlers.print());
+		
+		verify(missionService, times(1)).save(req);
 	}
 }

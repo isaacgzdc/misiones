@@ -11,7 +11,10 @@ import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 @Configuration
 public class JacksonConfig {
-
+	
+	public static final String DATE_WITH_HOUR_FORMAT = "yyyy-MM-dd'T'hh:mm";
+	public static final String TIMESTAMP_FORMAT = "yyyy-MM-dd'T'hh:mm:ss.SSS";
+	
 	@Bean
 	@Primary
 	public ObjectMapper objectMapper() {
@@ -20,4 +23,5 @@ public class JacksonConfig {
 				.disable(SerializationFeature.WRITE_DATE_KEYS_AS_TIMESTAMPS)
 				.build();
 	}
+	
 }

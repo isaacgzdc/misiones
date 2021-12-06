@@ -1,8 +1,11 @@
 package com.example.misiones.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.example.misiones.dto.request.MissionRequest;
+import com.example.misiones.model.Ship;
 
 import lombok.RequiredArgsConstructor;
 
@@ -17,7 +20,7 @@ public class MissionValidationServiceImpl implements MissionValidationService {
 	@Override
 	public boolean isValid(MissionRequest req) {
 		if(req != null) {
-		return hasShipAndCaptain(req)
+		return hasShipAndStartDate(req)
 				&& hasCaptainAndPlanet(req)
 				&& hasShipPilot(req)
 				&& hasRequiredCrew(req)
@@ -29,20 +32,21 @@ public class MissionValidationServiceImpl implements MissionValidationService {
 	}
 
 	@Override
-	public boolean hasShipAndCaptain(MissionRequest req) {
-		// TODO Auto-generated method stub
-		return false;
+	public boolean hasShipAndStartDate(MissionRequest req) {
+		Optional<Ship> ship = shipService.findById(req.getShip().getId());
+		return ship.isPresent() && req.getInitDate() != null;
 	}
 
 	@Override
 	public boolean hasCaptainAndPlanet(MissionRequest req) {
-		// TODO Auto-generated method stub
-		return false;
+		boolean captain= crewService.containsCaptain(req.getCaptains());
+		boolean planet = planetService.containsPlanet(req.getPlanets());
+		return captain && planet;
 	}
 
 	@Override
 	public boolean hasShipPilot(MissionRequest req) {
-		// TODO Auto-generated method stub
+		boolean pilot = shipService.previousPilotInMission(req.getShip(),req.getCrew());
 		return false;
 	}
 

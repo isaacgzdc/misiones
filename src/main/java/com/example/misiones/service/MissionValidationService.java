@@ -7,7 +7,7 @@ public interface MissionValidationService {
 	boolean isValid(MissionRequest req);
 	
 	//At least one ship and one captain for each mission
-	boolean hasShipAndCaptain(MissionRequest req);
+	boolean hasShipAndStartDate(MissionRequest req);
 	
 	// At least one or more captain and planets for each mission
 	boolean hasCaptainAndPlanet(MissionRequest req);
