@@ -33,39 +33,38 @@ public class MissionValidationServiceImpl implements MissionValidationService {
 
 	@Override
 	public boolean hasShipAndStartDate(MissionRequest req) {
-		Optional<Ship> ship = shipService.findById(req.getShip().getId());
-		return ship.isPresent() && req.getInitDate() != null;
+		// TODO validation
+				return true;
 	}
 
 	@Override
 	public boolean hasCaptainAndPlanet(MissionRequest req) {
-		boolean captain= crewService.containsCaptain(req.getCaptains());
-		boolean planet = planetService.containsPlanet(req.getPlanets());
-		return captain && planet;
+		// TODO validation
+				return true;
 	}
 
 	@Override
 	public boolean hasShipPilot(MissionRequest req) {
-		boolean pilot = shipService.previousPilotInMission(req.getShip(),req.getCrew());
-		return false;
+		// TODO validation
+				return true;
 	}
 
 	@Override
 	public boolean hasRequiredCrew(MissionRequest req) {
-		// TODO Auto-generated method stub
-		return false;
+		// TODO validation
+				return true;
 	}
 
 	@Override
 	public boolean hasRequiredPassengers(MissionRequest req) {
-		// TODO Auto-generated method stub
-		return false;
+		// TODO validation
+				return true;
 	}
 
 	@Override
 	public boolean hasExclusiveCaptain(MissionRequest req) {
-		// TODO Auto-generated method stub
-		return false;
+		// TODO validation
+		return true;
 	}
 
 }

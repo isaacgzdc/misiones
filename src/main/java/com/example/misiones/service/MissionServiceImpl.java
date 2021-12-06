@@ -69,26 +69,26 @@ public class MissionServiceImpl implements MissionService {
 	@Override
 	public Mission save(MissionRequest req) {
 		if(missionValidationService.isValid(req)) {
-		Set<Planet> planets = planetService.savePlanets(req.getPlanets());
-		Ship ship = shipService.save(req.getShip());
-		if(ship != null) {
-			Set<Crew> captains = crewService.saveCaptains(req.getCaptains());
-			Set<Crew> crew = crewService.saveCrew(req.getCrew());
-			if(captains != null && !captains.isEmpty()) {
-				ship.getCrew().addAll(captains);
+			Set<Planet> planets = planetService.savePlanets(req.getPlanets());
+			Ship ship = shipService.save(req.getShip());
+			if(ship != null) {
+				Set<Crew> captains = crewService.saveCaptains(req.getCaptains());
+				Set<Crew> crew = crewService.saveCrew(req.getCrew());
+				if(captains != null && !captains.isEmpty()) {
+					ship.getCrew().addAll(captains);
+				}
+				if(crew != null && !crew.isEmpty()) {
+					ship.getCrew().addAll(crew);
+				}
 			}
-			if(crew != null && !crew.isEmpty()) {
-				ship.getCrew().addAll(crew);
-			}
-		}
-		Mission mission = Mission.builder()
-				.initDate(req.getInitDate())
-				.name(req.getName())
-				.planets(planets)
-				.ship(ship)
-				.build();
-		missionRepository.save(mission);
-		return mission;
+			Mission mission = Mission.builder()
+					.initDate(req.getInitDate())
+					.name(req.getName())
+					.planets(planets)
+					.ship(ship)
+					.build();
+			missionRepository.save(mission);
+			return mission;
 		}
 		return null;
 	}

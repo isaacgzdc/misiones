@@ -20,3 +20,7 @@ springdoc:
   swagger-ui:
     path: /api-ui-html
     operations-sorter: method 
+    
+jwt:
+  secret: password
+  
