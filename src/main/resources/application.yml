@@ -1,0 +1,22 @@
+spring:
+  datasource: 
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa.database-platform: org.hibernate.dialect.H2Dialect
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+  h2:
+    console.enabled: true
+logging:
+  level:
+    root: WARN
+    '[com.example.misiones]': DEBUG
+springdoc:
+  api-docs.path: /api-docs
+  swagger-ui:
+    path: /api-ui-html
+    operations-sorter: method 
