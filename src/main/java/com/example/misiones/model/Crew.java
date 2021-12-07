@@ -1,9 +1,5 @@
 package com.example.misiones.model;
 
-import java.util.HashSet;
-import java.util.Set;
-
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,14 +7,12 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 import org.springframework.lang.NonNull;
 
 import com.example.misiones.model.enums.CrewType;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,17 +39,11 @@ public class Crew {
 	@NonNull
 	private CrewType type;
 
-	@Builder.Default
-	@ManyToMany(mappedBy = "crew", cascade = CascadeType.PERSIST)
-	private Set<Ship> ships = new HashSet<>();
-
 	public void addShip(Ship ship) {
-		this.ships.add(ship);
 		ship.getCrew().add(this);
 	}
 
 	public void removeShip(Ship ship) {
-		this.ships.remove(ship);
 		ship.getCrew().remove(this);
 	}
 }

@@ -1,23 +1,17 @@
 package com.example.misiones.model;
 
 import java.math.BigDecimal;
-import java.util.HashSet;
-import java.util.Set;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -44,8 +38,4 @@ public class Planet {
 	private String name;
 	private BigDecimal diameter;
 	
-	@JsonIgnore
-	@Builder.Default
-	@ManyToMany(mappedBy = "planets",cascade = CascadeType.PERSIST)
-	private Set<Mission> missions = new HashSet<>();
 }

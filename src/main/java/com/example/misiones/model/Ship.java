@@ -12,14 +12,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
-import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,12 +42,6 @@ public class Ship {
 	@NotBlank
 	private String name;
 
-	@JsonIgnore
-	@Builder.Default
-	@OneToMany(mappedBy = "ship")
-	private Set<Mission> mission = new HashSet<>();
-
-	@JsonIgnore
 	@Builder.Default
 	@ManyToMany(cascade = CascadeType.PERSIST)
 	@JoinTable(name = "SHIP_CREW", joinColumns = { @JoinColumn(name = "SHIP_ID") }, inverseJoinColumns = {
@@ -65,12 +56,10 @@ public class Ship {
 
 	public void addCrew(Crew crew) {
 		this.crew.add(crew);
-		crew.getShips().add(this);
 	}
 
 	public void removeCrew(Crew crew) {
 		this.crew.remove(crew);
-		crew.getShips().remove(this);
 	}
 
 	public void addPassenger(Passenger pass) {

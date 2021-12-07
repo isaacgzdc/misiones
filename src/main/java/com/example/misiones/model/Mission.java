@@ -23,7 +23,6 @@ import javax.validation.constraints.Size;
 
 import com.example.misiones.config.JacksonConfig;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -55,13 +54,11 @@ public class Mission {
 	@JsonFormat(pattern = JacksonConfig.DATE_WITH_HOUR_FORMAT)
 	private LocalDateTime endDate;
 	
-	@JsonIgnore
 	@NotNull
 	@ManyToOne(cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "SHIP_ID")
 	private Ship ship;
 	
-	@JsonIgnore
 	@Builder.Default
 	@ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(
@@ -73,12 +70,10 @@ public class Mission {
 	
 	public void addPlanet(Planet planet) {
 		this.planets.add(planet);
-		planet.getMissions().add(this);
 	}
 	
 	public void removePlanet(Planet planet) {
 		this.planets.remove(planet);
-		planet.getMissions().remove(this);
 	}
 	
 }

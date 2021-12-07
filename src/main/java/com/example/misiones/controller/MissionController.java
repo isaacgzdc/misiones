@@ -44,6 +44,7 @@ public class MissionController {
 		Optional<Mission> opt = missionService.findById(id);
 		opt.map(mission -> {
 			log.debug("Find mission with id({})",id);
+			log.debug("Mission found: {}",opt.get().toString());
 			return new ResponseEntity<Mission>(opt.get(), HttpStatus.OK);
 		}).orElseGet(()->{
 			log.debug("Cannot find mission with id({})",id);
