@@ -6,12 +6,12 @@ Tu run the app:
  
  To access api docs:
  
- http://localhost:8080/api-docs
- http://localhost:8080/api-ui-html
+ - http://localhost:8080/api-docs
+ - http://localhost:8080/api-ui-html
  
  The database:
  
- http://localhost:8080/h2-console/
+ - http://localhost:8080/h2-console/
  
  user: sa
  password: password
